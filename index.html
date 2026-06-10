@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Duo — Apprends la Bible en jouant</title>
+  <meta name="description" content="Bible Duo est une application de jeux bibliques gamifiés : Speed Verse, Battle, Bingo, Escape, Memory, Clé Secrète. XP, classement, progression." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-dim:   rgba(201,168,76,.15);
+      --gold-border:rgba(201,168,76,.25);
+      --ink:        #0E0B07;
+      --ink-mid:    #1A1510;
+      --ink-card:   #1E1912;
+      --parch:      #FDF6E3;
+      --gray:       #9A9080;
+      --gray-light: #C8BFB0;
+      --sage:       #52796F;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ink);
+      color: var(--parch);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 2rem;
+      background: rgba(14,11,7,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem; letter-spacing: .06em;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: .82rem; color: var(--gray-light);
+      text-decoration: none; letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,168,76,.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 70%, rgba(82,121,111,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: .02em;
+      color: var(--parch);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--gold-light); }
+    .hero-sub {
+      font-size: clamp(.95rem, 2.2vw, 1.15rem);
+      color: var(--gray-light); max-width: 560px;
+      margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--gold); color: var(--ink);
+      font-family: 'Cinzel', serif; font-weight: 700;
+      font-size: .9rem; letter-spacing: .06em;
+      padding: .85rem 2.2rem; border-radius: 6px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 24px rgba(201,168,76,.25);
+    }
+    .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .hero-note {
+      margin-top: 1rem;
+      font-size: .78rem; color: var(--gray);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--parch); margin-bottom: 1rem; line-height: 1.25;
+    }
+    .section-body {
+      color: var(--gray-light); font-size: .95rem; line-height: 1.85;
+      max-width: 680px;
+    }
+    .section-body + .section-body { margin-top: .9rem; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+      border-radius: 1px;
+    }
+
+    /* ── GAMES GRID ── */
+    #jeux { background: var(--ink-mid); }
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .game-card {
+      background: var(--ink-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 10px; padding: 1.4rem 1.25rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .game-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .game-icon { font-size: 1.8rem; margin-bottom: .7rem; line-height: 1; }
+    .game-name {
+      font-family: 'Cinzel', serif; font-size: .95rem;
+      color: var(--parch); margin-bottom: .35rem;
+    }
+    .game-desc { font-size: .83rem; color: var(--gray); line-height: 1.6; }
+    .game-xp {
+      margin-top: .8rem; font-size: .75rem;
+      color: var(--gold); font-weight: 500;
+    }
+
+    /* ── FEATURES ── */
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem; margin-top: 2rem;
+    }
+    .feature-item {
+      display: flex; gap: .75rem; align-items: flex-start;
+      padding: .9rem 1rem;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+    }
+    .feature-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+    .feature-text { font-size: .85rem; color: var(--gray-light); line-height: 1.55; }
+
+    /* ── PHILOSOPHY ── */
+    #philosophie { border-top: 1px solid var(--gold-border); }
+    .pull-quote {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: var(--gold-light);
+      line-height: 1.65;
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--gold);
+      margin: 2rem 0;
+      background: var(--gold-dim);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* ── PRIVACY ── */
+    #confidentialite {
+      background: var(--ink-mid);
+      border-top: 1px solid var(--gold-border);
+    }
+    .privacy-block { margin-top: 2rem; }
+    .privacy-block h3 {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      color: var(--parch); margin-bottom: .6rem;
+    }
+    .privacy-block p, .privacy-block li {
+      font-size: .88rem; color: var(--gray-light); line-height: 1.8;
+    }
+    .privacy-block ul { padding-left: 1.2rem; margin-top: .4rem; }
+    .privacy-block li { margin-bottom: .3rem; }
+    .privacy-block + .privacy-block { margin-top: 1.75rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2.5rem 1.5rem;
+      border-top: 1px solid var(--gold-border);
+      font-size: .8rem; color: var(--gray);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      nav { padding: .8rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 3.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">📖 Bible Duo</a>
+  <div class="nav-links">
+    <a href="#jeux">Jeux</a>
+    <a href="#philosophie">Le projet</a>
+    <a href="#confidentialite">Confidentialité</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Application mobile &amp; web</p>
+  <h1>Apprends la Bible<br /><span>en jouant.</span></h1>
+  <p class="hero-sub">
+    6 mini-jeux bibliques, un système XP, un classement mondial.
+    Chaque partie est une façon différente d'explorer les textes — et de vraiment les retenir.
+  </p>
+  <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener" class="hero-cta">
+    Jouer maintenant →
+  </a>
+  <p class="hero-note">Disponible sur Android · Accès web gratuit</p>
+</section>
+
+<!-- JEUX -->
+<section id="jeux">
+  <div class="container">
+    <p class="section-label">Les 6 jeux</p>
+    <h2 class="section-title">Six façons d'explorer la Bible</h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Chaque jeu est conçu autour d'une mécanique différente — rapidité, mémoire, déduction, stratégie.
+      Tous puisent dans les mêmes textes, mais activent des modes d'apprentissage distincts.
+    </p>
+
+    <div class="games-grid">
+      <div class="game-card">
+        <div class="game-icon">⚡</div>
+        <div class="game-name">Speed Verse</div>
+        <div class="game-desc">60 secondes. Le maximum de bonnes réponses. Le combo multiplie les points.</div>
+        <div class="game-xp">Jusqu'à 400 XP</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">⚔️</div>
+        <div class="game-name">Bible Battle</div>
+        <div class="game-desc">Toi contre une IA à 3 niveaux. Réponds plus vite et plus juste pour l'emporter.</div>
+        <div class="game-xp">Jusqu'à 120 XP</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🎯</div>
+        <div class="game-name">Bible Bingo</div>
+        <div class="game-desc">Grille 5×5. Complète des lignes de bonnes réponses pour marquer des points.</div>
+        <div class="game-xp">Jusqu'à 80 XP par cellule</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🔐</div>
+        <div class="game-name">Bible Escape</div>
+        <div class="game-desc">20 niveaux d'énigmes bibliques. Résous, progresse, débloque des badges.</div>
+        <div class="game-xp">Jusqu'à 250 XP</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🃏</div>
+        <div class="game-name">Bible Memory</div>
+        <div class="game-desc">20 paires de cartes bibliques à retrouver. Concentration et mémoire visuelle.</div>
+        <div class="game-xp">Jusqu'à 140 XP</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🗝️</div>
+        <div class="game-name">Clé Secrète</div>
+        <div class="game-desc">Un coffre mystérieux, des indices bibliques, une clé à découvrir.</div>
+        <div class="game-xp">Jusqu'à 230 XP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section id="fonctionnalites">
+  <div class="container">
+    <p class="section-label">Fonctionnalités</p>
+    <h2 class="section-title">Conçu pour durer</h2>
+    <div class="divider"></div>
+    <div class="features-list">
+      <div class="feature-item">
+        <span class="feature-icon">⭐</span>
+        <span class="feature-text">Système XP et niveaux — progression calculée côté serveur, anti-triche</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🏆</span>
+        <span class="feature-text">Classement mondial en temps réel</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔥</span>
+        <span class="feature-text">Streak quotidien avec bonus XP</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔑</span>
+        <span class="feature-text">Connexion sans email — phrase secrète de 12 mots en français</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📖</span>
+        <span class="feature-text">Références bibliques sur chaque question</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📱</span>
+        <span class="feature-text">Application Android native (Google Play) + accès web</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🌐</span>
+        <span class="feature-text">Mode hors-ligne — les questions restent disponibles sans réseau</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🆓</span>
+        <span class="feature-text">Entièrement gratuit, sans publicité</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHIE -->
+<section id="philosophie">
+  <div class="container">
+    <p class="section-label">Le projet</p>
+    <h2 class="section-title">Pourquoi Bible Duo ?</h2>
+    <div class="divider"></div>
+
+    <div class="pull-quote">
+      « L'idée de Bible Duo est née d'une réflexion simple. »
+    </div>
+
+    <p class="section-body">
+      Beaucoup de personnes lisent la Bible, mais peu arrivent réellement à retenir les passages,
+      à comprendre les liens entre les textes, ou à se souvenir des contextes.
+      Ce n'est pas un problème d'intérêt — c'est souvent simplement une question de méthode.
+    </p>
+    <p class="section-body">
+      En parallèle, on sait que le jeu est un formidable outil d'apprentissage.
+      Quand on joue, le cerveau s'implique différemment : on réfléchit, on teste, on fait des erreurs,
+      on recommence… et surtout, on retient.
+    </p>
+    <p class="section-body" style="margin-top:.9rem;">
+      Le projet est développé de manière indépendante. Chaque jeu, chaque fonctionnalité
+      est le résultat d'expérimentations et d'essais. Bible Duo est encore en évolution —
+      et les retours des utilisateurs sont précieux pour le faire grandir.
+    </p>
+
+    <div style="margin-top:2rem; display:flex; gap:.75rem; flex-wrap:wrap;">
+      <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--ink);font-family:'Cinzel',serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+        Essayer l'app →
+      </a>
+      <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold-light);border:1px solid var(--gold-border);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+        💬 Partager un avis
+      </a>
+      <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#ff8a87;border:1px solid rgba(255,94,91,.3);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+        ☕ Soutenir le projet
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIDENTIALITÉ -->
+<section id="confidentialite">
+  <div class="container">
+    <p class="section-label">Politique de confidentialité</p>
+    <h2 class="section-title">Vos données</h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Dernière mise à jour : juin 2026. Cette politique s'applique à l'application mobile
+      Bible Duo (<code style="color:var(--gold);font-size:.85em;">com.bibleduo.game</code>)
+      et au site web associé.
+    </p>
+
+    <div class="privacy-block">
+      <h3>1. Données collectées</h3>
+      <p>Bible Duo collecte uniquement les données nécessaires au fonctionnement de l'application. Deux modes d'inscription sont proposés :</p>
+      <ul>
+        <li>
+          <strong>Inscription avec email</strong> : pseudonyme, adresse email et mot de passe
+          (stocké sous forme de hash cryptographique — jamais en clair)
+        </li>
+        <li>
+          <strong>Inscription sans email (phrase secrète)</strong> : pseudonyme et phrase de 12 mots (BIP39)
+          servant d'identifiant unique, stockée sous forme de hash — aucun email n'est requis ni collecté dans ce mode
+        </li>
+      </ul>
+      <p style="margin-top:.6rem;">Dans les deux cas, sont également collectés :</p>
+      <ul>
+        <li>Des <strong>statistiques de jeu</strong> : points XP, nombre de parties, progression par jeu, streak quotidien</li>
+        <li>La <strong>date du dernier check-in</strong> pour le calcul du bonus de streak</li>
+      </ul>
+    </div>
+
+    <div class="privacy-block">
+      <h3>2. Données non collectées</h3>
+      <ul>
+        <li>Aucun numéro de téléphone ni donnée d'identité réelle au-delà du pseudonyme</li>
+        <li>Aucune donnée de localisation</li>
+        <li>Aucun suivi publicitaire ni traceur tiers</li>
+        <li>Aucune donnée de paiement (l'application est entièrement gratuite)</li>
+      </ul>
+    </div>
+
+    <div class="privacy-block">
+      <h3>3. Utilisation des données</h3>
+      <p>Les données collectées sont utilisées exclusivement pour :</p>
+      <ul>
+        <li>Authentifier l'utilisateur et retrouver sa progression</li>
+        <li>Afficher le classement (leaderboard public : pseudonyme + XP uniquement)</li>
+        <li>Calculer et attribuer les points XP de façon sécurisée côté serveur</li>
+      </ul>
+    </div>
+
+    <div class="privacy-block">
+      <h3>4. Stockage et sécurité</h3>
+      <p>
+        Les données sont stockées sur des serveurs sécurisés (Railway, hébergement Europe/USA).
+        Les mots de passe et phrases secrètes ne sont jamais stockés en clair — seule leur empreinte cryptographique (bcrypt) est conservée en base. Les communications entre l'application et le serveur sont chiffrées via HTTPS.
+      </p>
+    </div>
+
+    <div class="privacy-block">
+      <h3>5. Partage des données</h3>
+      <p>
+        Aucune donnée personnelle n'est vendue, louée ou partagée avec des tiers à des fins commerciales.
+        Le pseudonyme et le score XP sont visibles publiquement dans le classement de l'application.
+      </p>
+    </div>
+
+    <div class="privacy-block">
+      <h3>6. Suppression des données</h3>
+      <p>
+        Pour demander la suppression de votre compte et de toutes les données associées,
+        contactez-nous via le formulaire de feedback disponible dans l'application ou à l'adresse ci-dessous.
+        La suppression sera effectuée dans un délai de 30 jours.
+      </p>
+    </div>
+
+    <div class="privacy-block">
+      <h3>7. Contact</h3>
+      <p>
+        Pour toute question relative à cette politique ou à vos données :
+        <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
+          style="color:var(--gold);">formulaire de contact</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:.4rem;">
+    <strong style="font-family:'Cinzel',serif;color:var(--gold-light);">Bible Duo</strong>
+    &nbsp;·&nbsp; Application de jeux bibliques
+  </p>
+  <p>
+    <a href="#confidentialite">Politique de confidentialité</a>
+    &nbsp;·&nbsp;
+    <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener">Jouer en ligne</a>
+    &nbsp;·&nbsp;
+    <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener">Soutenir le projet</a>
+  </p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:var(--gray);">
+    © 2026 Bible Duo · Projet indépendant
+  </p>
+</footer>
+
+</body>
+</html>
