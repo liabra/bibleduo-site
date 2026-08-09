@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bible Duo — Apprends la Bible en jouant</title>
-  <meta name="description" content="Bible Duo est une application de jeux bibliques gamifiés : Speed Verse, Battle, Bingo, Escape, Memory, Clé Secrète. XP, classement, progression." />
+  <title>Manna — Apprends la Bible en jouant</title>
+  <meta name="description" content="Manna est une application de jeux bibliques : Speed Verse, Battle, Bingo, Escape, Memory, Clé Secrète. XP, classement, progression." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
@@ -16,9 +16,9 @@
       --gold-light: #E8C96A;
       --gold-dim:   rgba(201,168,76,.15);
       --gold-border:rgba(201,168,76,.25);
-      --ink:        #0E0B07;
-      --ink-mid:    #1A1510;
-      --ink-card:   #1E1912;
+      --ink:        #2b2013;
+      --ink-mid:    #3a2c1a;
+      --ink-card:   #33261a;
       --parch:      #FDF6E3;
       --gray:       #9A9080;
       --gray-light: #C8BFB0;
@@ -40,7 +40,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: .9rem 2rem;
-      background: rgba(14,11,7,.85);
+      background: rgba(43,32,19,.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gold-border);
     }
@@ -229,7 +229,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">📖 Bible Duo</a>
+  <a href="#" class="nav-logo">📖 Manna</a>
   <div class="nav-links">
     <a href="#jeux">Jeux</a>
     <a href="#philosophie">Le projet</a>
@@ -312,11 +312,11 @@
     <div class="features-list">
       <div class="feature-item">
         <span class="feature-icon">⭐</span>
-        <span class="feature-text">Système XP et niveaux — progression calculée côté serveur, anti-triche</span>
+        <span class="feature-text">Système XP et niveaux — progression calculée côté serveur</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">🏆</span>
-        <span class="feature-text">Classement mondial en temps réel</span>
+        <span class="feature-text">Classement mondial (pseudonyme et XP)</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">🔥</span>
@@ -350,14 +350,25 @@
 <section id="philosophie">
   <div class="container">
     <p class="section-label">Le projet</p>
-    <h2 class="section-title">Pourquoi Bible Duo ?</h2>
+    <h2 class="section-title">Pourquoi « Manna » ?</h2>
     <div class="divider"></div>
 
     <div class="pull-quote">
-      « L'idée de Bible Duo est née d'une réflexion simple. »
+      « Qu'est-ce que c'est ? » — Exode 16:15
     </div>
 
     <p class="section-body">
+      Dans la Bible, la <strong>manne</strong> est le pain venu du ciel que Dieu donne chaque
+      matin au peuple d'Israël dans le désert (Exode 16). Il fallait la recueillir
+      <em>chaque jour</em>, un peu à la fois. Et lorsque les Hébreux la découvrirent, leur toute
+      première réaction fut… une question : « Qu'est-ce que c'est ? » (Exode 16:15).
+    </p>
+    <p class="section-body" style="margin-top:.9rem;">
+      Difficile de rêver meilleur nom pour un jeu de questions : <strong>Manna</strong>, c'est se
+      nourrir de la Bible un peu chaque jour, une question après l'autre.
+    </p>
+
+    <p class="section-body" style="margin-top:1.6rem;">
       Beaucoup de personnes lisent la Bible, mais peu arrivent réellement à retenir les passages,
       à comprendre les liens entre les textes, ou à se souvenir des contextes.
       Ce n'est pas un problème d'intérêt — c'est souvent simplement une question de méthode.
@@ -369,7 +380,7 @@
     </p>
     <p class="section-body" style="margin-top:.9rem;">
       Le projet est développé de manière indépendante. Chaque jeu, chaque fonctionnalité
-      est le résultat d'expérimentations et d'essais. Bible Duo est encore en évolution —
+      est le résultat d'expérimentations et d'essais. Manna est encore en évolution —
       et les retours des utilisateurs sont précieux pour le faire grandir.
     </p>
 
@@ -397,14 +408,14 @@
     <h2 class="section-title">Vos données</h2>
     <div class="divider"></div>
     <p class="section-body">
-      Dernière mise à jour : juin 2026. Cette politique s'applique à l'application mobile
-      Bible Duo (<code style="color:var(--gold);font-size:.85em;">com.bibleduo.game</code>)
+      Dernière mise à jour : août 2026. Cette politique s'applique à l'application mobile
+      Manna (<code style="color:var(--gold);font-size:.85em;">com.bibleduo.game</code>)
       et au site web associé.
     </p>
 
     <div class="privacy-block">
       <h3>1. Données collectées</h3>
-      <p>Bible Duo collecte uniquement les données nécessaires au fonctionnement de l'application. Deux modes d'inscription sont proposés :</p>
+      <p>Manna collecte uniquement les données nécessaires au fonctionnement de l'application. Deux modes d'inscription sont proposés :</p>
       <ul>
         <li>
           <strong>Inscription avec email</strong> : pseudonyme, adresse email et mot de passe
@@ -462,8 +473,10 @@
       <h3>6. Suppression des données</h3>
       <p>
         Pour demander la suppression de votre compte et de toutes les données associées,
-        contactez-nous via le formulaire de feedback disponible dans l'application ou à l'adresse ci-dessous.
-        La suppression sera effectuée dans un délai de 30 jours.
+        rendez-vous sur notre
+        <a href="suppression-compte.html" style="color:var(--gold);font-weight:600;">page de suppression de compte</a>,
+        qui détaille la procédure à suivre. La suppression est effectuée dans un délai de
+        30 jours maximum, et est définitive.
       </p>
     </div>
 
@@ -481,18 +494,20 @@
 <!-- FOOTER -->
 <footer>
   <p style="margin-bottom:.4rem;">
-    <strong style="font-family:'Cinzel',serif;color:var(--gold-light);">Bible Duo</strong>
+    <strong style="font-family:'Cinzel',serif;color:var(--gold-light);">Manna</strong>
     &nbsp;·&nbsp; Application de jeux bibliques
   </p>
   <p>
     <a href="#confidentialite">Politique de confidentialité</a>
+    &nbsp;·&nbsp;
+    <a href="suppression-compte.html">Suppression de compte</a>
     &nbsp;·&nbsp;
     <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener">Jouer en ligne</a>
     &nbsp;·&nbsp;
     <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener">Soutenir le projet</a>
   </p>
   <p style="margin-top:.8rem;font-size:.75rem;color:var(--gray);">
-    © 2026 Bible Duo · Projet indépendant
+    © 2026 Manna · Projet indépendant
   </p>
 </footer>
 
