@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manna — Apprends la Bible en jouant</title>
-  <meta name="description" content="Manna est une application de jeux bibliques : Speed Verse, Battle, Bingo, Escape, Memory, Clé Secrète. XP, classement, progression." />
+  <meta name="description" content="Manna est une application de jeux bibliques : Bible Speedrun, Bible Battle, Bible Bingo, Bible Escape, Bible Memory, Clé Secrète. XP, classement, progression." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
@@ -223,6 +223,13 @@
       .nav-links { gap: 1rem; }
       section { padding: 3.5rem 1.2rem; }
     }
+    /* Sous ~380 px, logo + 3 liens depassaient la largeur de l'ecran. */
+    @media (max-width: 400px) {
+      nav { padding: .7rem .9rem; }
+      .nav-logo { font-size: 1rem; }
+      .nav-links { gap: .7rem; }
+      .nav-links a { font-size: .74rem; letter-spacing: .02em; }
+    }
   </style>
 </head>
 <body>
@@ -248,7 +255,7 @@
   <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener" class="hero-cta">
     Jouer maintenant →
   </a>
-  <p class="hero-note">Disponible sur Android · Accès web gratuit</p>
+  <p class="hero-note">Android en test fermé sur Google Play · Accès web gratuit</p>
 </section>
 
 <!-- JEUX -->
@@ -265,39 +272,39 @@
     <div class="games-grid">
       <div class="game-card">
         <div class="game-icon">⚡</div>
-        <div class="game-name">Speed Verse</div>
+        <div class="game-name">Bible Speedrun</div>
         <div class="game-desc">60 secondes. Le maximum de bonnes réponses. Le combo multiplie les points.</div>
-        <div class="game-xp">Jusqu'à 400 XP</div>
+        <div class="game-xp">Jusqu'à 400 XP par partie</div>
       </div>
       <div class="game-card">
         <div class="game-icon">⚔️</div>
         <div class="game-name">Bible Battle</div>
-        <div class="game-desc">Toi contre une IA à 3 niveaux. Réponds plus vite et plus juste pour l'emporter.</div>
-        <div class="game-xp">Jusqu'à 120 XP</div>
+        <div class="game-desc">Toi contre une IA — Novice, Standard ou Expert. Réponds plus vite et plus juste pour l'emporter.</div>
+        <div class="game-xp">Jusqu'à 120 XP par partie</div>
       </div>
       <div class="game-card">
         <div class="game-icon">🎯</div>
         <div class="game-name">Bible Bingo</div>
         <div class="game-desc">Grille 5×5. Complète des lignes de bonnes réponses pour marquer des points.</div>
-        <div class="game-xp">Jusqu'à 80 XP par cellule</div>
+        <div class="game-xp">Jusqu'à 260 XP par grille</div>
       </div>
       <div class="game-card">
         <div class="game-icon">🔐</div>
         <div class="game-name">Bible Escape</div>
         <div class="game-desc">20 niveaux d'énigmes bibliques. Résous, progresse, débloque des badges.</div>
-        <div class="game-xp">Jusqu'à 250 XP</div>
+        <div class="game-xp">Jusqu'à 50 XP par niveau</div>
       </div>
       <div class="game-card">
         <div class="game-icon">🃏</div>
         <div class="game-name">Bible Memory</div>
-        <div class="game-desc">20 paires de cartes bibliques à retrouver. Concentration et mémoire visuelle.</div>
-        <div class="game-xp">Jusqu'à 140 XP</div>
+        <div class="game-desc">8 paires à retrouver, tirées d'un jeu de cartes bibliques. Concentration et mémoire visuelle.</div>
+        <div class="game-xp">Jusqu'à 100 XP par partie</div>
       </div>
       <div class="game-card">
         <div class="game-icon">🗝️</div>
         <div class="game-name">Clé Secrète</div>
-        <div class="game-desc">Un coffre mystérieux, des indices bibliques, une clé à découvrir.</div>
-        <div class="game-xp">Jusqu'à 230 XP</div>
+        <div class="game-desc">Un verset à compléter par jour. Cinq clés collectées ouvrent le coffre.</div>
+        <div class="game-xp">Jusqu'à 30 XP par verset</div>
       </div>
     </div>
   </div>
@@ -332,7 +339,7 @@
       </div>
       <div class="feature-item">
         <span class="feature-icon">📱</span>
-        <span class="feature-text">Application Android native (Google Play) + accès web</span>
+        <span class="feature-text">Application Android en test fermé sur Google Play · accès web ouvert à tous</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">🌐</span>
@@ -378,6 +385,23 @@
       Quand on joue, le cerveau s'implique différemment : on réfléchit, on teste, on fait des erreurs,
       on recommence… et surtout, on retient.
     </p>
+    <h3 style="font-family:'Cinzel',serif;color:var(--gold-light);font-size:1.05rem;letter-spacing:.03em;margin-top:2.2rem;margin-bottom:.7rem;">
+      📖 Un socle biblique commun
+    </h3>
+    <p class="section-body">
+      Manna s'appuie sur les textes et les récits communs aux principales traditions
+      chrétiennes, afin de rester accessible au plus grand nombre. L'objectif n'est pas
+      de défendre une confession particulière, mais de proposer une façon ludique de
+      découvrir la Bible, de la mémoriser et de mieux la connaître.
+    </p>
+    <p class="section-body" style="margin-top:.9rem;">
+      Chaque question renvoie à une référence biblique, et les énoncés privilégient les
+      faits directement établis par les textes — en évitant autant que possible les
+      débats confessionnels et les interprétations particulières. Rien n'est parfait du
+      premier coup : les retours des testeurs nous aident à lever les ambiguïtés, une
+      question après l'autre.
+    </p>
+
     <p class="section-body" style="margin-top:.9rem;">
       Le projet est développé de manière indépendante. Chaque jeu, chaque fonctionnalité
       est le résultat d'expérimentations et d'essais. Manna est encore en évolution —
@@ -408,8 +432,8 @@
     <h2 class="section-title">Vos données</h2>
     <div class="divider"></div>
     <p class="section-body">
-      Dernière mise à jour : août 2026. Cette politique s'applique à l'application mobile
-      Manna (<code style="color:var(--gold);font-size:.85em;">com.bibleduo.game</code>)
+      Dernière mise à jour : septembre 2026. Cette politique s'applique à l'application mobile
+      Manna (<code style="color:var(--gold);font-size:.85em;">com.liabra.manna</code>)
       et au site web associé.
     </p>
 
@@ -423,7 +447,7 @@
         </li>
         <li>
           <strong>Inscription sans email (phrase secrète)</strong> : pseudonyme et phrase de 12 mots (BIP39)
-          servant d'identifiant unique, stockée sous forme de hash — aucun email n'est requis ni collecté dans ce mode
+          servant à vous authentifier, conservée uniquement sous forme d'empreinte cryptographique — aucune adresse e-mail n'est demandée ni conservée dans ce mode
         </li>
       </ul>
       <p style="margin-top:.6rem;">Dans les deux cas, sont également collectés :</p>
@@ -448,7 +472,7 @@
       <p>Les données collectées sont utilisées exclusivement pour :</p>
       <ul>
         <li>Authentifier l'utilisateur et retrouver sa progression</li>
-        <li>Afficher le classement (leaderboard public : pseudonyme + XP uniquement)</li>
+        <li>Afficher le classement public : pseudonyme, avatar et XP</li>
         <li>Calculer et attribuer les points XP de façon sécurisée côté serveur</li>
       </ul>
     </div>
@@ -456,7 +480,12 @@
     <div class="privacy-block">
       <h3>4. Stockage et sécurité</h3>
       <p>
-        Les données sont stockées sur des serveurs sécurisés (Railway, hébergement Europe/USA).
+        Les données applicatives de Manna sont hébergées sur des infrastructures situées
+        dans l'Union européenne : le serveur applicatif Railway à Amsterdam (Pays-Bas)
+        et la base MongoDB Atlas sur AWS à Paris (eu-west-3), en France, répliquée sur
+        trois nœuds.
+      </p>
+      <p style="margin-top:.7rem;">
         Les mots de passe et phrases secrètes ne sont jamais stockés en clair — seule leur empreinte cryptographique (bcrypt) est conservée en base. Les communications entre l'application et le serveur sont chiffrées via HTTPS.
       </p>
     </div>
@@ -472,11 +501,12 @@
     <div class="privacy-block">
       <h3>6. Suppression des données</h3>
       <p>
-        Pour demander la suppression de votre compte et de toutes les données associées,
-        rendez-vous sur notre
-        <a href="suppression-compte.html" style="color:var(--gold);font-weight:600;">page de suppression de compte</a>,
-        qui détaille la procédure à suivre. La suppression est effectuée dans un délai de
-        30 jours maximum, et est définitive.
+        Vous pouvez supprimer votre compte <strong>directement dans l'application</strong>,
+        depuis votre profil : la suppression est alors immédiate et définitive. Vous pouvez
+        aussi en faire la demande par e-mail ; elle est alors traitée sous 30 jours maximum.
+        Notre
+        <a href="suppression-compte.html" style="color:var(--gold);font-weight:600;">page de suppression de compte</a>
+        détaille les deux procédures. Dans les deux cas, la suppression est irréversible.
       </p>
     </div>
 
@@ -484,6 +514,8 @@
       <h3>7. Contact</h3>
       <p>
         Pour toute question relative à cette politique ou à vos données :
+        <a href="mailto:manna.app@proton.me" style="color:var(--gold);">manna.app@proton.me</a>,
+        ou via notre
         <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
           style="color:var(--gold);">formulaire de contact</a>.
       </p>
