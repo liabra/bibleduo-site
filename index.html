@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Aucune ressource externe n'est chargée : tout vient de ce site. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'none'; form-action 'none'" />
+  <!-- Aucune ressource externe n'est chargée. Seule exception : le compteur de joueurs lit un nombre sur le serveur du jeu (assets/live.js). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src https://bibleduo-game-production.up.railway.app; base-uri 'none'; form-action 'none'" />
   <title>Manna : Apprends la Bible en jouant</title>
   <meta name="description" content="Manna est une application de jeux bibliques : Bible Speedrun, Bible Battle, Bible Bingo, Bible Escape, Bible Memory, Clé Secrète, Chronologie, Mots mêlés, Mots croisés. XP, classement, progression. Jouable sur Android et iPhone en version PWA." />
   <meta name="color-scheme" content="dark light" />
@@ -34,6 +34,7 @@
   <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/fonts.css" />
   <script src="assets/theme.js"></script>
+  <script src="assets/live.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -230,6 +231,9 @@
     .btn-primary:hover { background: var(--gold-light); }
     .btn-ghost { background: transparent; color: var(--gold-light); border: 1px solid var(--gold-border); }
     .nowrap { white-space: nowrap; }
+    .live-note { display:flex; width:fit-content; max-width:92%; align-items:center; justify-content:center; gap:.55rem; margin:1.1rem auto 0; padding:.45rem 1rem; border-radius:999px; border:1px solid var(--gold); font-size:.9rem; line-height:1.35; text-align:left; }
+    .live-note[hidden] { display:none; }
+    .live-dot { width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 6px #22c55e; flex:none; }
     .hero-note {
       margin-top: 1rem;
       font-size: .88rem; color: var(--gray);
@@ -423,6 +427,7 @@
   <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener" class="hero-cta">
     Jouer maintenant →
   </a>
+  <p class="live-note" id="live-count" role="status" hidden><span class="live-dot" aria-hidden="true"></span><span data-live-text></span></p>
   <p class="hero-note">
     Jouable sur Android et iPhone en version PWA, gratuitement.
     <a href="#installer" style="color:var(--gold);">Voir comment faire</a><br />
@@ -805,6 +810,14 @@
         Pour limiter les abus, le serveur compte les requêtes à partir d'une empreinte cryptographique de
         l'adresse IP (jamais l'adresse elle-même), supprimée au bout d'une heure environ au plus.
       </p>
+      <p style="margin-top:.6rem;">
+        Le <strong>compteur de joueurs en ligne</strong> fonctionne de la même façon : à chaque ouverture, l'application tire un
+        identifiant aléatoire qu'elle garde uniquement en mémoire (rien n'est écrit sur votre appareil), et envoie un signal
+        par minute tant qu'elle est ouverte. Cet identifiant n'est relié ni à un compte, ni à une adresse IP, ni à un nom.
+        Il sert uniquement à compter combien de joueurs sont là, et n'est affiché qu'à partir de quelques joueurs.
+        Sur ce site, le navigateur lit ce nombre auprès du serveur du jeu : le serveur voit alors, comme pour toute visite,
+        votre adresse IP et votre navigateur, sans rien enregistrer de plus.
+      </p>
     </div>
 
     <div class="privacy-block">
@@ -812,7 +825,7 @@
       <ul>
         <li>Aucun numéro de téléphone ni donnée d'identité réelle au-delà du pseudonyme</li>
         <li>Aucune donnée de localisation</li>
-        <li>Aucun suivi publicitaire ni traceur tiers : le site ne charge aucune ressource externe, même pas les polices</li>
+        <li>Aucun suivi publicitaire ni traceur tiers : le site ne charge ni police ni script externe. Une seule requête part vers le serveur du jeu, pour lire le nombre de joueurs en ligne (voir ci-dessous)</li>
         <li>Aucun cookie : le site ne garde dans votre navigateur que votre choix de thème clair ou sombre</li>
         <li>Aucune donnée de paiement (l'application est entièrement gratuite)</li>
         <li>Aucune donnée sur vos croyances : jouer à Manna ne vous demande jamais votre religion</li>
@@ -834,7 +847,7 @@
         </li>
         <li>
           <strong>Assurer la sécurité et l'équité</strong> : limiter les abus et la triche, mesurer l'audience
-          de façon anonyme. Base légale : mon intérêt légitime (art. 6.1.f)
+          de façon anonyme, afficher le nombre de joueurs en ligne. Base légale : mon intérêt légitime (art. 6.1.f)
         </li>
         <li>
           <strong>T'ajouter aux testeurs Android</strong> : si tu m'écris pour devenir testeur, ton adresse
@@ -860,6 +873,7 @@
         <li>Un défi entre amis disparaît tout seul 14 jours après sa création.</li>
         <li>Le lien de réinitialisation du mot de passe est valable 30 minutes.</li>
         <li>Les compteurs de limitation de requêtes sont supprimés au bout d'une heure environ au plus.</li>
+        <li>Les signaux du compteur de joueurs en ligne sont supprimés 10 minutes après le dernier envoi.</li>
       </ul>
     </div>
 
