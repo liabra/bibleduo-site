@@ -147,12 +147,12 @@
       font-size: 1.1rem; letter-spacing: .06em;
       color: var(--gold-light);
       text-decoration: none;
-      display: inline-block; padding: .6rem 0;
+      display: inline-block; padding: .6rem 0; white-space: nowrap;
     }
     .nav-right { display: flex; align-items: center; gap: .75rem; }
     .nav-links { display: flex; gap: 1rem; }
     .nav-links a {
-      display: inline-block; padding: .65rem .35rem;
+      display: inline-block; padding: .65rem .35rem; white-space: nowrap;
       font-size: .85rem; color: var(--gray-light);
       text-decoration: none; letter-spacing: .04em;
       transition: color .2s;
@@ -219,6 +219,17 @@
       box-shadow: 0 4px 24px var(--cta-shadow);
     }
     .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .actions { margin-top: 2rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      text-align: center; text-wrap: balance;
+      font-size: .85rem; padding: .7rem 1.6rem; border-radius: 6px;
+      text-decoration: none; min-height: 44px; box-sizing: border-box; max-width: 100%;
+    }
+    .btn-primary { background: var(--gold); color: var(--ink); font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: .05em; }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-ghost { background: transparent; color: var(--gold-light); border: 1px solid var(--gold-border); }
+    .nowrap { white-space: nowrap; }
     .hero-note {
       margin-top: 1rem;
       font-size: .88rem; color: var(--gray);
@@ -347,8 +358,23 @@
 
     /* ── MOBILE ── */
     @media (max-width: 600px) {
-      nav { padding: .4rem 1.2rem; }
-      .nav-links { gap: .5rem; }
+      /* Deux lignes : logo + bouton de thème en haut, les trois liens en dessous, bien alignés. */
+      nav {
+        display: grid; grid-template-columns: 1fr auto;
+        grid-template-areas: "logo toggle" "links links";
+        align-items: center; padding: .25rem 1rem 0;
+      }
+      .nav-right { display: contents; }
+      .nav-logo { grid-area: logo; }
+      .theme-toggle { grid-area: toggle; }
+      .nav-links {
+        grid-area: links; justify-content: space-between; gap: .25rem;
+        border-top: 1px solid var(--gold-border);
+      }
+      .nav-links a { flex: 1; text-align: center; }
+      html { scroll-padding-top: 7.5rem; }
+      .hero { padding-top: 8.5rem; }
+      .btn { flex: 1 1 100%; }
       section { padding: 3.5rem 1.2rem; }
     }
     /* Sous ~380 px, logo + 3 liens + bouton de thème dépassaient la largeur de l'écran. */
@@ -712,17 +738,15 @@
       Bienvenue dans l'aventure Manna.
     </p>
 
-    <div style="margin-top:2rem; display:flex; gap:.75rem; flex-wrap:wrap;">
-      <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener"
-        style="display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--ink);font-family:'Cinzel',serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
-        Jouer en version PWA (Android et iPhone) →
+    <div class="actions">
+      <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener" class="btn btn-primary">
+        <span><span class="nowrap">Jouer en version PWA</span> <span class="nowrap">(Android et iPhone) →</span></span>
       </a>
-      <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
-        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold-light);border:1px solid var(--gold-border);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+      <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener" class="btn btn-ghost">
         <span aria-hidden="true">💬</span> Partager un avis
       </a>
-      <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener"
-        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--kofi);border:1px solid var(--kofi-border);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+      <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener" class="btn btn-ghost"
+        style="color:var(--kofi);border-color:var(--kofi-border);">
         <span aria-hidden="true">☕</span> Soutenir le projet
       </a>
     </div>
