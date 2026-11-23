@@ -3,60 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Aucune ressource externe n'est chargée : tout vient de ce site. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'none'; form-action 'none'" />
   <title>Manna : Apprends la Bible en jouant</title>
-  <meta name="description" content="Manna est une application de jeux bibliques : Bible Speedrun, Bible Battle, Bible Bingo, Bible Escape, Bible Memory, Clé Secrète. XP, classement, progression. Jouable sur Android et iPhone en version PWA." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <meta name="description" content="Manna est une application de jeux bibliques : Bible Speedrun, Bible Battle, Bible Bingo, Bible Escape, Bible Memory, Clé Secrète, Chronologie, Mots mêlés, Mots croisés. XP, classement, progression. Jouable sur Android et iPhone en version PWA." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#2b2013" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FDF6E3" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://liabra.github.io/bibleduo-site/" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- Aperçu lors du partage (WhatsApp, Telegram, Facebook…) : les URL d'image doivent être absolues. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Manna" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://liabra.github.io/bibleduo-site/" />
+  <meta property="og:title" content="Manna : apprends la Bible en jouant" />
+  <meta property="og:description" content="Quiz, défis et jeux bibliques. Gratuit, jouable sur Android et iPhone sans passer par un store." />
+  <meta property="og:image" content="https://liabra.github.io/bibleduo-site/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Manna, apprends la Bible en jouant : un livre ouvert et des cartes de quiz dorées" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preload" href="assets/fonts/cinzel-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/fonts.css" />
+  <script src="assets/theme.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --gold:       #C9A84C;
+      color-scheme: dark;
+      --gold: #C9A84C;
       --gold-light: #E8C96A;
-      --gold-dim:   rgba(201,168,76,.15);
-      --gold-border:rgba(201,168,76,.25);
-      --ink:        #2b2013;
-      --ink-mid:    #3a2c1a;
-      --ink-card:   #33261a;
-      --parch:      #FDF6E3;
-      --gray:       #9A9080;
-      --gray-light: #C8BFB0;
-      --sage:       #52796F;
+      --gold-dim: rgba(201,168,76,.15);
+      --gold-border: rgba(201,168,76,.25);
+      --ink: #2b2013;
+      --ink-mid: #3a2c1a;
+      --ink-card: #33261a;
+      --parch: #FDF6E3;
+      --gray: #AEA494;
+      --gray-light: #CFC6B7;
+      --sage: #52796F;
+      --nav-bg: rgba(43,32,19,.88);
+      --glow: rgba(201,168,76,.10);
+      --glow-2: rgba(82,121,111,.08);
+      --kofi: #ff8a87;
+      --kofi-border: rgba(255,94,91,.35);
+      --focus: #E8C96A;
+      --cta-shadow: rgba(201,168,76,.25);
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --gold: #7A5A10;
+      --gold-light: #6B4C0A;
+      --gold-dim: rgba(122,90,16,.10);
+      --gold-border: rgba(122,90,16,.38);
+      --ink: #FDF6E3;
+      --ink-mid: #F3E8C8;
+      --ink-card: #FFFBF0;
+      --parch: #2b2013;
+      --gray: #5C5242;
+      --gray-light: #4A402F;
+      --sage: #2F5D52;
+      --nav-bg: rgba(253,246,227,.92);
+      --glow: rgba(201,168,76,.20);
+      --glow-2: rgba(82,121,111,.10);
+      --kofi: #A12622;
+      --kofi-border: rgba(161,38,34,.45);
+      --focus: #6B4C0A;
+      --cta-shadow: rgba(122,90,16,.22);
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --gold: #7A5A10;
+        --gold-light: #6B4C0A;
+        --gold-dim: rgba(122,90,16,.10);
+        --gold-border: rgba(122,90,16,.38);
+        --ink: #FDF6E3;
+        --ink-mid: #F3E8C8;
+        --ink-card: #FFFBF0;
+        --parch: #2b2013;
+        --gray: #5C5242;
+        --gray-light: #4A402F;
+        --sage: #2F5D52;
+        --nav-bg: rgba(253,246,227,.92);
+        --glow: rgba(201,168,76,.20);
+        --glow-2: rgba(82,121,111,.10);
+        --kofi: #A12622;
+        --kofi-border: rgba(161,38,34,.45);
+        --focus: #6B4C0A;
+        --cta-shadow: rgba(122,90,16,.22);
+      }
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-padding-top: 4.5rem; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       background: var(--ink);
       color: var(--parch);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
+    /* ── ACCESSIBILITE ── */
+    .skip-link {
+      position: absolute; left: .75rem; top: -5rem; z-index: 300;
+      background: var(--gold); color: var(--ink);
+      font-weight: 600; font-size: .95rem;
+      padding: .7rem 1.1rem; border-radius: 6px; text-decoration: none;
+    }
+    .skip-link:focus { top: .75rem; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+    main:focus { outline: none; }
+    .section-body a, .privacy-block a, .hero-note a { text-decoration: underline; text-underline-offset: .2em; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .game-card:hover, .hero-cta:hover { transform: none; }
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: .9rem 2rem;
-      background: rgba(43,32,19,.85);
+      padding: .5rem 2rem;
+      background: var(--nav-bg);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gold-border);
     }
     .nav-logo {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel', Georgia, serif;
       font-size: 1.1rem; letter-spacing: .06em;
       color: var(--gold-light);
       text-decoration: none;
+      display: inline-block; padding: .6rem 0;
     }
-    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-right { display: flex; align-items: center; gap: .75rem; }
+    .nav-links { display: flex; gap: 1rem; }
     .nav-links a {
-      font-size: .82rem; color: var(--gray-light);
+      display: inline-block; padding: .65rem .35rem;
+      font-size: .85rem; color: var(--gray-light);
       text-decoration: none; letter-spacing: .04em;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover { color: var(--gold-light); text-decoration: underline; text-underline-offset: .25em; }
+    .theme-toggle {
+      display: none; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: transparent; color: var(--gold-light);
+      border: 1px solid var(--gold-border); cursor: pointer;
+    }
+    .theme-toggle:hover { background: var(--gold-dim); }
+    .js .theme-toggle { display: inline-flex; }
+    .theme-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-moon { display: none; }
+    .theme-toggle[data-mode="light"] .icon-sun { display: none; }
+    .theme-toggle[data-mode="light"] .icon-moon { display: block; }
 
     /* ── HERO ── */
     .hero {
@@ -72,16 +185,17 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,168,76,.10) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 80% 70%, rgba(82,121,111,.08) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 55% at 50% 40%, var(--glow) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 70%, var(--glow-2) 0%, transparent 60%);
       pointer-events: none;
     }
+    .hero > * { position: relative; }
     .hero-eyebrow {
-      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
       color: var(--gold); margin-bottom: 1.4rem;
     }
     .hero h1 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel', Georgia, serif;
       font-size: clamp(2.8rem, 7vw, 5.2rem);
       font-weight: 700; line-height: 1.1;
       letter-spacing: .02em;
@@ -97,28 +211,28 @@
     .hero-cta {
       display: inline-flex; align-items: center; gap: .6rem;
       background: var(--gold); color: var(--ink);
-      font-family: 'Cinzel', serif; font-weight: 700;
+      font-family: 'Cinzel', Georgia, serif; font-weight: 700;
       font-size: .9rem; letter-spacing: .06em;
       padding: .85rem 2.2rem; border-radius: 6px;
       text-decoration: none;
       transition: background .2s, transform .15s;
-      box-shadow: 0 4px 24px rgba(201,168,76,.25);
+      box-shadow: 0 4px 24px var(--cta-shadow);
     }
     .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
     .hero-note {
       margin-top: 1rem;
-      font-size: .78rem; color: var(--gray);
+      font-size: .88rem; color: var(--gray);
     }
 
     /* ── SECTION BASE ── */
     section { padding: 5rem 1.5rem; }
     .container { max-width: 960px; margin: 0 auto; }
     .section-label {
-      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
       color: var(--gold); margin-bottom: .75rem;
     }
     .section-title {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel', Georgia, serif;
       font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       color: var(--parch); margin-bottom: 1rem; line-height: 1.25;
     }
@@ -136,6 +250,20 @@
       border-radius: 1px;
     }
 
+    /* ── APERCU (captures) ── */
+    .screens {
+      display: flex; gap: 1rem; margin-top: 2rem;
+      padding: .5rem .25rem 1.25rem;
+      overflow-x: auto; scroll-snap-type: x proximity;
+    }
+    .screens figure { flex: 0 0 min(250px, 68vw); scroll-snap-align: start; }
+    .screens img {
+      display: block; width: 100%; height: auto;
+      border-radius: 22px; border: 1px solid var(--gold-border);
+      background: #0d0a05;
+    }
+    .screens figcaption { margin-top: .6rem; font-size: .88rem; color: var(--gray-light); text-align: center; }
+
     /* ── GAMES GRID ── */
     #jeux { background: var(--ink-mid); }
     .games-grid {
@@ -152,12 +280,12 @@
     .game-card:hover { border-color: var(--gold); transform: translateY(-3px); }
     .game-icon { font-size: 1.8rem; margin-bottom: .7rem; line-height: 1; }
     .game-name {
-      font-family: 'Cinzel', serif; font-size: .95rem;
+      font-family: 'Cinzel', Georgia, serif; font-size: .95rem; font-weight: 600;
       color: var(--parch); margin-bottom: .35rem;
     }
-    .game-desc { font-size: .83rem; color: var(--gray); line-height: 1.6; }
+    .game-desc { font-size: .88rem; color: var(--gray); line-height: 1.6; }
     .game-xp {
-      margin-top: .8rem; font-size: .75rem;
+      margin-top: .8rem; font-size: .82rem;
       color: var(--gold); font-weight: 500;
     }
 
@@ -175,12 +303,12 @@
       border-radius: 8px;
     }
     .feature-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
-    .feature-text { font-size: .85rem; color: var(--gray-light); line-height: 1.55; }
+    .feature-text { font-size: .9rem; color: var(--gray-light); line-height: 1.55; }
 
     /* ── PHILOSOPHY ── */
     #philosophie { border-top: 1px solid var(--gold-border); }
     .pull-quote {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel', Georgia, serif;
       font-size: clamp(1.05rem, 2.2vw, 1.35rem);
       color: var(--gold-light);
       line-height: 1.65;
@@ -198,11 +326,11 @@
     }
     .privacy-block { margin-top: 2rem; }
     .privacy-block h3 {
-      font-family: 'Cinzel', serif; font-size: 1rem;
+      font-family: 'Cinzel', Georgia, serif; font-size: 1rem;
       color: var(--parch); margin-bottom: .6rem;
     }
     .privacy-block p, .privacy-block li {
-      font-size: .88rem; color: var(--gray-light); line-height: 1.8;
+      font-size: .92rem; color: var(--gray-light); line-height: 1.8;
     }
     .privacy-block ul { padding-left: 1.2rem; margin-top: .4rem; }
     .privacy-block li { margin-bottom: .3rem; }
@@ -212,44 +340,58 @@
     footer {
       text-align: center; padding: 2.5rem 1.5rem;
       border-top: 1px solid var(--gold-border);
-      font-size: .8rem; color: var(--gray);
+      font-size: .85rem; color: var(--gray);
     }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a { color: var(--gold); text-decoration: underline; text-underline-offset: .2em; }
+    footer a:hover { color: var(--gold-light); }
 
     /* ── MOBILE ── */
     @media (max-width: 600px) {
-      nav { padding: .8rem 1.2rem; }
-      .nav-links { gap: 1rem; }
+      nav { padding: .4rem 1.2rem; }
+      .nav-links { gap: .5rem; }
       section { padding: 3.5rem 1.2rem; }
     }
-    /* Sous ~380 px, logo + 3 liens depassaient la largeur de l'ecran. */
+    /* Sous ~380 px, logo + 3 liens + bouton de thème dépassaient la largeur de l'écran. */
     @media (max-width: 400px) {
-      nav { padding: .7rem .9rem; }
-      .nav-logo { font-size: 1rem; }
-      .nav-links { gap: .7rem; }
-      .nav-links a { font-size: .74rem; letter-spacing: .02em; }
+      nav { padding: .35rem .7rem; }
+      .nav-logo { font-size: .95rem; letter-spacing: .02em; }
+      .nav-right { gap: .2rem; }
+      .nav-links { gap: .1rem; }
+      .nav-links a { font-size: .8rem; letter-spacing: 0; padding: .65rem .3rem; }
+      .theme-toggle { width: 40px; height: 40px; }
     }
   </style>
 </head>
 <body>
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">📖 Manna</a>
-  <div class="nav-links">
-    <a href="#jeux">Jeux</a>
-    <a href="#philosophie">Le projet</a>
-    <a href="#confidentialite">Confidentialité</a>
+<header>
+<nav aria-label="Navigation principale">
+  <a href="#" class="nav-logo"><span aria-hidden="true">📖</span> Manna</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#jeux">Jeux</a>
+      <a href="#philosophie">Le projet</a>
+      <a href="#confidentialite">Confidentialité</a>
+    </div>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème" title="Changer de thème">
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
 </nav>
+</header>
+
+<main id="contenu" tabindex="-1">
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" aria-labelledby="titre-accueil">
   <p class="hero-eyebrow">Application mobile &amp; web</p>
-  <h1>Apprends la Bible<br /><span>en jouant.</span></h1>
+  <h1 id="titre-accueil">Apprends la Bible<br /><span>en jouant.</span></h1>
   <p class="hero-sub">
-    Six mini-jeux bibliques avec un système d'XP et un classement mondial.
+    Neuf mini-jeux bibliques avec un système d'XP et un classement mondial.
     Chaque partie aborde les textes d'une façon différente, et on finit par vraiment les retenir.
   </p>
   <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener" class="hero-cta">
@@ -258,15 +400,47 @@
   <p class="hero-note">
     Jouable sur Android et iPhone en version PWA, gratuitement.
     <a href="#installer" style="color:var(--gold);">Voir comment faire</a><br />
-    L'application Android est en test fermé sur Google Play.
+    Pas encore d'application native sur Android ni sur iPhone.
+    <a href="#application" style="color:var(--gold);">En savoir plus</a>
   </p>
 </section>
 
+<!-- APERCU -->
+<section id="apercu" aria-labelledby="titre-apercu">
+  <div class="container">
+    <p class="section-label">Aperçu</p>
+    <h2 class="section-title" id="titre-apercu">Le jeu en images</h2>
+    <div class="divider"></div>
+    <div class="screens" role="region" aria-label="Captures d'écran du jeu" tabindex="0">
+      <figure>
+        <img src="assets/img/ecran-accueil.webp" width="520" height="1037" loading="lazy" decoding="async"
+          alt="Écran d'accueil de Manna : le profil du joueur et la liste des jeux" />
+        <figcaption>Les jeux</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/ecran-bingo.webp" width="520" height="1037" loading="lazy" decoding="async"
+          alt="Bible Bingo : une grille de cinq cases par cinq" />
+        <figcaption>Bible Bingo</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/ecran-speedrun.webp" width="520" height="1037" loading="lazy" decoding="async"
+          alt="Bible Speedrun : un verset à compléter, avec le chrono, le combo et le score" />
+        <figcaption>Bible Speedrun</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/ecran-escape.webp" width="520" height="1037" loading="lazy" decoding="async"
+          alt="Bible Escape : les vingt badges à débloquer et la liste des niveaux" />
+        <figcaption>Bible Escape</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- INSTALLER (PWA) -->
-<section id="installer">
+<section id="installer" aria-labelledby="titre-installer">
   <div class="container">
     <p class="section-label">Version PWA</p>
-    <h2 class="section-title">Joue sur Android et iPhone</h2>
+    <h2 class="section-title" id="titre-installer">Joue sur Android et iPhone</h2>
     <div class="divider"></div>
     <p class="section-body">
       Pas besoin de passer par un store. Ouvre Manna dans ton navigateur,
@@ -291,10 +465,10 @@
 </section>
 
 <!-- JEUX -->
-<section id="jeux">
+<section id="jeux" aria-labelledby="titre-jeux">
   <div class="container">
-    <p class="section-label">Les 6 jeux</p>
-    <h2 class="section-title">Six façons d'aborder la Bible</h2>
+    <p class="section-label">Les 9 jeux</p>
+    <h2 class="section-title" id="titre-jeux">Neuf façons d'aborder la Bible</h2>
     <div class="divider"></div>
     <p class="section-body">
       Chaque jeu repose sur une mécanique différente : rapidité, mémoire, déduction, stratégie.
@@ -303,93 +477,146 @@
 
     <div class="games-grid">
       <div class="game-card">
-        <div class="game-icon">⚡</div>
-        <div class="game-name">Bible Speedrun</div>
+        <div class="game-icon" aria-hidden="true">⚡</div>
+        <h3 class="game-name">Bible Speedrun</h3>
         <div class="game-desc">60 secondes. Le maximum de bonnes réponses. Le combo multiplie les points.</div>
         <div class="game-xp">Jusqu'à 400 XP par partie</div>
       </div>
       <div class="game-card">
-        <div class="game-icon">⚔️</div>
-        <div class="game-name">Bible Battle</div>
+        <div class="game-icon" aria-hidden="true">⚔️</div>
+        <h3 class="game-name">Bible Battle</h3>
         <div class="game-desc">Toi contre une IA, au niveau Novice, Standard ou Expert. Réponds plus vite et plus juste pour l'emporter.</div>
         <div class="game-xp">Jusqu'à 120 XP par partie</div>
       </div>
       <div class="game-card">
-        <div class="game-icon">🎯</div>
-        <div class="game-name">Bible Bingo</div>
+        <div class="game-icon" aria-hidden="true">🎯</div>
+        <h3 class="game-name">Bible Bingo</h3>
         <div class="game-desc">Grille 5×5. Complète des lignes de bonnes réponses pour marquer des points.</div>
         <div class="game-xp">Jusqu'à 260 XP par grille</div>
       </div>
       <div class="game-card">
-        <div class="game-icon">🔐</div>
-        <div class="game-name">Bible Escape</div>
+        <div class="game-icon" aria-hidden="true">🔐</div>
+        <h3 class="game-name">Bible Escape</h3>
         <div class="game-desc">20 niveaux d'énigmes bibliques. Résous-les pour progresser et débloquer des badges.</div>
         <div class="game-xp">Jusqu'à 50 XP par niveau</div>
       </div>
       <div class="game-card">
-        <div class="game-icon">🃏</div>
-        <div class="game-name">Bible Memory</div>
+        <div class="game-icon" aria-hidden="true">🃏</div>
+        <h3 class="game-name">Bible Memory</h3>
         <div class="game-desc">8 paires à retrouver, tirées d'un jeu de cartes bibliques. Concentration et mémoire visuelle.</div>
         <div class="game-xp">Jusqu'à 100 XP par partie</div>
       </div>
       <div class="game-card">
-        <div class="game-icon">🗝️</div>
-        <div class="game-name">Clé Secrète</div>
+        <div class="game-icon" aria-hidden="true">🗝️</div>
+        <h3 class="game-name">Clé Secrète</h3>
         <div class="game-desc">Un verset à compléter par jour. Cinq clés collectées ouvrent le coffre.</div>
         <div class="game-xp">Jusqu'à 30 XP par verset</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon" aria-hidden="true">⏳</div>
+        <h3 class="game-name">Chronologie</h3>
+        <div class="game-desc">Remets l'histoire dans l'ordre.</div>
+        <div class="game-xp">Jusqu'à 70 XP par partie</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon" aria-hidden="true">🔎</div>
+        <h3 class="game-name">Mots mêlés</h3>
+        <div class="game-desc">8 mots bibliques à retrouver dans la grille.</div>
+        <div class="game-xp">Jusqu'à 100 XP par partie</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon" aria-hidden="true">✏️</div>
+        <h3 class="game-name">Mots croisés</h3>
+        <div class="game-desc">Des définitions bibliques à deviner.</div>
+        <div class="game-xp">Jusqu'à 100 XP par partie</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FONCTIONNALITÉS -->
-<section id="fonctionnalites">
+<section id="fonctionnalites" aria-labelledby="titre-fonctionnalites">
   <div class="container">
     <p class="section-label">Fonctionnalités</p>
-    <h2 class="section-title">Conçu pour durer</h2>
+    <h2 class="section-title" id="titre-fonctionnalites">Conçu pour durer</h2>
     <div class="divider"></div>
     <div class="features-list">
       <div class="feature-item">
-        <span class="feature-icon">⭐</span>
+        <span class="feature-icon" aria-hidden="true">⭐</span>
         <span class="feature-text">XP et niveaux, avec une progression calculée côté serveur</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">🏆</span>
+        <span class="feature-icon" aria-hidden="true">🏆</span>
         <span class="feature-text">Classement mondial (pseudonyme et XP)</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">🔥</span>
+        <span class="feature-icon" aria-hidden="true">🔥</span>
         <span class="feature-text">Streak quotidien avec bonus XP</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">🔑</span>
+        <span class="feature-icon" aria-hidden="true">🔑</span>
         <span class="feature-text">Connexion sans email, avec une phrase secrète de 12 mots en français</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">📖</span>
+        <span class="feature-icon" aria-hidden="true">📖</span>
         <span class="feature-text">Références bibliques sur chaque question</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">📱</span>
-        <span class="feature-text">Jouable sur Android et iPhone en version PWA. L'application Android est en test fermé sur Google Play.</span>
+        <span class="feature-icon" aria-hidden="true">📱</span>
+        <span class="feature-text">Jouable sur Android et iPhone en version PWA, sans application native pour le moment</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">🌐</span>
+        <span class="feature-icon" aria-hidden="true">🤝</span>
+        <span class="feature-text">Défis entre amis et groupes, avec leur propre classement</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">🌐</span>
         <span class="feature-text">Mode hors-ligne : les questions restent disponibles sans réseau</span>
       </div>
       <div class="feature-item">
-        <span class="feature-icon">🆓</span>
+        <span class="feature-icon" aria-hidden="true">🆓</span>
         <span class="feature-text">Entièrement gratuit, sans publicité</span>
       </div>
     </div>
   </div>
 </section>
 
+<!-- APPLICATION NATIVE / TESTEURS -->
+<section id="application" aria-labelledby="titre-application">
+  <div class="container">
+    <p class="section-label">Application native</p>
+    <h2 class="section-title" id="titre-application">Pas encore sur les stores</h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Manna n'est pas encore disponible en application native, ni sur Android ni sur iPhone.
+      En attendant, la version PWA fonctionne sur les deux.
+    </p>
+    <div class="features-list">
+      <div class="feature-item">
+        <span class="feature-text"><strong style="color:var(--parch);">Android</strong><br />
+          L'application est en test fermé sur Google Play. Il me faut des bêta-testeurs pour valider la mise en production.</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-text"><strong style="color:var(--parch);">iPhone</strong><br />
+          Une application iPhone est prévue dès que possible.</span>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <a href="mailto:manna.app@proton.me?subject=Devenir%20testeur%20Android%20Manna&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20devenir%20testeur%20de%20Manna%20sur%20Android.%0A%0AAdresse%20e-mail%20de%20mon%20compte%20Google%20Play%20%3A%20" class="hero-cta">
+        Devenir testeur Android →
+      </a>
+    </div>
+    <p class="section-body" style="margin-top:1rem;">
+      Dans ton message, indique l'adresse e-mail de ton compte Google Play.
+    </p>
+  </div>
+</section>
+
 <!-- PHILOSOPHIE -->
-<section id="philosophie">
+<section id="philosophie" aria-labelledby="titre-philosophie">
   <div class="container">
     <p class="section-label">Le projet</p>
-    <h2 class="section-title">Pourquoi « Manna » ?</h2>
+    <h2 class="section-title" id="titre-philosophie">Pourquoi « Manna » ?</h2>
     <div class="divider"></div>
 
     <div class="pull-quote">
@@ -430,7 +657,7 @@
       Chaque question renvoie à une référence biblique. Les énoncés s'en tiennent aux
       faits directement établis par les textes et évitent autant que possible les
       débats confessionnels et les interprétations particulières. Rien n'est parfait du
-      premier coup : les retours des testeurs nous aident à lever les ambiguïtés, une
+      premier coup : les retours des testeurs m'aident à lever les ambiguïtés, une
       question après l'autre.
     </p>
 
@@ -492,21 +719,21 @@
       </a>
       <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
         style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold-light);border:1px solid var(--gold-border);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
-        💬 Partager un avis
+        <span aria-hidden="true">💬</span> Partager un avis
       </a>
       <a href="https://ko-fi.com/liabalagnaranin" target="_blank" rel="noopener"
-        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#ff8a87;border:1px solid rgba(255,94,91,.3);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
-        ☕ Soutenir le projet
+        style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--kofi);border:1px solid var(--kofi-border);font-size:.85rem;padding:.7rem 1.6rem;border-radius:6px;text-decoration:none;">
+        <span aria-hidden="true">☕</span> Soutenir le projet
       </a>
     </div>
   </div>
 </section>
 
 <!-- CONFIDENTIALITÉ -->
-<section id="confidentialite">
+<section id="confidentialite" aria-labelledby="titre-confidentialite">
   <div class="container">
     <p class="section-label">Politique de confidentialité</p>
-    <h2 class="section-title">Vos données</h2>
+    <h2 class="section-title" id="titre-confidentialite">Vos données</h2>
     <div class="divider"></div>
     <p class="section-body">
       Dernière mise à jour : novembre 2026. Cette politique s'applique à l'application mobile
@@ -539,7 +766,8 @@
       <ul>
         <li>Aucun numéro de téléphone ni donnée d'identité réelle au-delà du pseudonyme</li>
         <li>Aucune donnée de localisation</li>
-        <li>Aucun suivi publicitaire ni traceur tiers</li>
+        <li>Aucun suivi publicitaire ni traceur tiers : le site ne charge aucune ressource externe, même pas les polices</li>
+        <li>Aucun cookie : le site ne garde dans votre navigateur que votre choix de thème clair ou sombre</li>
         <li>Aucune donnée de paiement (l'application est entièrement gratuite)</li>
       </ul>
     </div>
@@ -599,6 +827,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
