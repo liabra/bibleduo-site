@@ -742,53 +742,110 @@
     </p>
 
     <div class="privacy-block">
-      <h3>1. Données collectées</h3>
+      <h3>1. Responsable du traitement</h3>
+      <p>
+        Manna est un projet indépendant, développé et édité par Lia (personne physique), seule
+        responsable du traitement de vos données. Contact :
+        <a href="mailto:manna.app@proton.me" style="color:var(--gold);">manna.app@proton.me</a>.
+        Voir aussi les <a href="mentions-legales.html" style="color:var(--gold);font-weight:600;">mentions légales</a>.
+      </p>
+    </div>
+
+    <div class="privacy-block">
+      <h3>2. Données collectées</h3>
       <p>Manna collecte uniquement les données nécessaires au fonctionnement de l'application. Deux modes d'inscription sont proposés :</p>
       <ul>
         <li>
-          <strong>Inscription avec email</strong> : pseudonyme, adresse email et mot de passe
-          (stocké sous forme de hash cryptographique, jamais en clair)
+          <strong>Inscription avec e-mail</strong> : pseudonyme, adresse e-mail et mot de passe
+          (stocké sous forme de hash cryptographique, jamais en clair). L'e-mail ne sert qu'à vous
+          envoyer le lien de réinitialisation du mot de passe, si vous le demandez
         </li>
         <li>
-          <strong>Inscription sans email (phrase secrète)</strong> : pseudonyme et phrase de 12 mots (BIP39)
+          <strong>Inscription sans e-mail (phrase secrète)</strong> : pseudonyme et phrase de 12 mots (BIP39)
           servant à vous authentifier, conservée uniquement sous forme d'empreinte cryptographique. Aucune adresse e-mail n'est demandée ni conservée dans ce mode
         </li>
       </ul>
       <p style="margin-top:.6rem;">Dans les deux cas, sont également collectés :</p>
       <ul>
-        <li>Des <strong>statistiques de jeu</strong> : points XP, nombre de parties, progression par jeu, streak quotidien</li>
-        <li>La <strong>date du dernier check-in</strong> pour le calcul du bonus de streak</li>
+        <li>Des <strong>statistiques de jeu</strong> : points XP, parties jouées, progression par jeu et par parcours, streak quotidien, défis et groupes auxquels vous participez</li>
+        <li>La <strong>date de votre dernière activité</strong> (connexion, partie, check-in du streak), pour calculer le bonus de streak et supprimer les comptes inactifs</li>
+        <li>La <strong>date à laquelle vous avez confirmé</strong> avoir 15 ans ou plus, ou l'accord d'un parent ou tuteur (aucun âge ni date de naissance n'est demandé)</li>
+        <li>Des <strong>indicateurs anti-triche</strong> (par exemple le nombre de parties terminées anormalement vite), utilisés pour garder le classement équitable. Aucune sanction n'est automatique</li>
       </ul>
+      <p style="margin-top:.6rem;">
+        L'application mesure aussi son audience de façon <strong>anonyme</strong> : des compteurs agrégés par jour
+        (système, mode d'utilisation, installations), sans identifiant, sans cookie et sans lien avec un compte.
+        Pour limiter les abus, le serveur compte les requêtes à partir d'une empreinte cryptographique de
+        l'adresse IP (jamais l'adresse elle-même), supprimée au bout d'une heure environ au plus.
+      </p>
     </div>
 
     <div class="privacy-block">
-      <h3>2. Données non collectées</h3>
+      <h3>3. Données non collectées</h3>
       <ul>
         <li>Aucun numéro de téléphone ni donnée d'identité réelle au-delà du pseudonyme</li>
         <li>Aucune donnée de localisation</li>
         <li>Aucun suivi publicitaire ni traceur tiers : le site ne charge aucune ressource externe, même pas les polices</li>
         <li>Aucun cookie : le site ne garde dans votre navigateur que votre choix de thème clair ou sombre</li>
         <li>Aucune donnée de paiement (l'application est entièrement gratuite)</li>
+        <li>Aucune donnée sur vos croyances : jouer à Manna ne vous demande jamais votre religion</li>
       </ul>
     </div>
 
     <div class="privacy-block">
-      <h3>3. Utilisation des données</h3>
-      <p>Les données collectées sont utilisées exclusivement pour :</p>
+      <h3>4. Finalités et bases légales</h3>
       <ul>
-        <li>Authentifier l'utilisateur et retrouver sa progression</li>
-        <li>Afficher le classement public : pseudonyme, avatar et XP</li>
-        <li>Calculer et attribuer les points XP de façon sécurisée côté serveur</li>
+        <li>
+          <strong>Créer et utiliser votre compte</strong> : vous authentifier, retrouver et calculer votre
+          progression (XP, streak, parcours), envoyer le lien de réinitialisation du mot de passe.
+          Base légale : l'exécution du service que vous demandez (art. 6.1.b du RGPD)
+        </li>
+        <li>
+          <strong>Afficher le classement public</strong> : pseudonyme, avatar et XP. Base légale :
+          mon intérêt légitime (art. 6.1.f), le classement étant au cœur du jeu. Vous pouvez vous y
+          opposer en supprimant votre compte, ou en me le demandant par e-mail pour être masqué
+        </li>
+        <li>
+          <strong>Assurer la sécurité et l'équité</strong> : limiter les abus et la triche, mesurer l'audience
+          de façon anonyme. Base légale : mon intérêt légitime (art. 6.1.f)
+        </li>
+        <li>
+          <strong>Vérifier l'âge déclaré</strong> : conserver la date de votre confirmation « 15 ans ou plus,
+          ou accord d'un parent ». Base légale : obligation légale de recueillir l'accord d'un parent en
+          dessous de 15 ans (art. 8 du RGPD et art. 45 de la loi Informatique et Libertés)
+        </li>
       </ul>
     </div>
 
     <div class="privacy-block">
-      <h3>4. Stockage et sécurité</h3>
+      <h3>5. Durée de conservation</h3>
+      <ul>
+        <li>Vos données de compte et de jeu sont conservées tant que votre compte existe.</li>
+        <li>
+          <strong>Un compte sans aucune activité pendant 24 mois est supprimé automatiquement</strong>,
+          avec ses données. Les parties, défis et appartenances aux groupes partent avec lui.
+        </li>
+        <li>Un défi entre amis disparaît tout seul 14 jours après sa création.</li>
+        <li>Le lien de réinitialisation du mot de passe est valable 30 minutes.</li>
+        <li>Les compteurs de limitation de requêtes sont supprimés au bout d'une heure environ au plus.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-block">
+      <h3>6. Stockage, sous-traitants et sécurité</h3>
       <p>
         Les données applicatives de Manna sont hébergées sur des infrastructures situées
         dans l'Union européenne : le serveur applicatif Railway à Amsterdam (Pays-Bas)
         et la base MongoDB Atlas sur AWS à Paris (eu-west-3), en France, répliquée sur
         trois nœuds.
+      </p>
+      <p style="margin-top:.7rem;">
+        Pour faire fonctionner Manna, je fais appel à des sous-traitants avec lesquels un contrat de
+        traitement des données est signé : Railway (serveur), MongoDB Atlas sur AWS (base de données),
+        un prestataire d'envoi d'e-mails (uniquement pour le lien de réinitialisation du mot de passe) et
+        GitHub (hébergement du site). Ce sont des sociétés soumises au droit américain : leurs éventuels
+        transferts de données hors de l'Union européenne reposent sur les clauses contractuelles types
+        et, le cas échéant, sur le cadre de protection des données UE-États-Unis (Data Privacy Framework).
       </p>
       <p style="margin-top:.7rem;">
         Le site web que vous consultez (cette page et la page de suppression de compte) est
@@ -802,34 +859,65 @@
       <p style="margin-top:.7rem;">
         Les mots de passe et phrases secrètes ne sont jamais stockés en clair : seule leur empreinte cryptographique (bcrypt) est conservée en base. Les communications entre l'application et le serveur sont chiffrées via HTTPS.
       </p>
+      <p style="margin-top:.7rem;">
+        En cas de violation de données susceptible de vous exposer à un risque, je préviens la CNIL
+        dans les 72 heures, et vous-même sans délai lorsque le risque est élevé.
+      </p>
     </div>
 
     <div class="privacy-block">
-      <h3>5. Partage des données</h3>
+      <h3>7. Partage des données</h3>
       <p>
         Aucune donnée personnelle n'est vendue, louée ou partagée avec des tiers à des fins commerciales.
-        Le pseudonyme et le score XP sont visibles publiquement dans le classement de l'application.
+        Le pseudonyme, l'avatar et le score XP sont visibles publiquement dans le classement de l'application.
+        Choisissez donc un pseudonyme qui ne vous identifie pas.
       </p>
     </div>
 
     <div class="privacy-block">
-      <h3>6. Suppression des données</h3>
+      <h3>8. Enfants et adolescents</h3>
       <p>
-        Vous pouvez supprimer votre compte <strong>directement dans l'application</strong>,
-        depuis votre profil : la suppression est alors immédiate et définitive. Vous pouvez
-        aussi en faire la demande par e-mail ; elle est alors traitée sous 30 jours maximum.
-        Notre
-        <a href="suppression-compte.html" style="color:var(--gold);font-weight:600;">page de suppression de compte</a>
-        détaille les deux procédures. Dans les deux cas, la suppression est irréversible.
+        Manna s'adresse à toute la famille, mais en France un mineur de moins de 15 ans ne peut
+        consentir seul au traitement de ses données : il lui faut l'accord d'un parent ou tuteur.
+        À l'inscription, une case à cocher demande donc de confirmer d'avoir 15 ans ou plus, ou
+        l'accord d'un parent ou tuteur. Aucun âge ni date de naissance n'est collecté. Le jeu n'a
+        pas de messagerie entre joueurs, les pseudonymes sont filtrés, et le compte « sans e-mail »
+        permet de jouer sans fournir aucune adresse. Un parent qui découvre le compte de son enfant
+        peut demander sa suppression par e-mail, à tout moment.
       </p>
     </div>
 
     <div class="privacy-block">
-      <h3>7. Contact</h3>
+      <h3>9. Vos droits et la suppression de vos données</h3>
+      <p>Vous disposez des droits suivants sur vos données :</p>
+      <ul>
+        <li>
+          <strong>Accès et portabilité</strong> : dans l'application, ouvrez votre profil puis
+          « Télécharger mes données » pour obtenir un fichier JSON de toutes vos données
+        </li>
+        <li><strong>Rectification</strong> : vous pouvez modifier votre pseudo et votre avatar depuis votre profil</li>
+        <li>
+          <strong>Effacement</strong> : vous pouvez supprimer votre compte <strong>directement dans l'application</strong>,
+          depuis votre profil : la suppression est alors immédiate et définitive. Vous pouvez
+          aussi en faire la demande par e-mail ; elle est alors traitée sous 30 jours maximum.
+          La <a href="suppression-compte.html" style="color:var(--gold);font-weight:600;">page de suppression de compte</a>
+          détaille les deux procédures. Dans les deux cas, la suppression est irréversible
+        </li>
+        <li><strong>Opposition et limitation</strong> : par e-mail, notamment pour être masqué du classement</li>
+      </ul>
+      <p style="margin-top:.6rem;">
+        Pour toute demande par e-mail, je réponds dans un délai d'un mois. Si vous estimez que vos
+        droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la CNIL
+        (<a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">cnil.fr/fr/plaintes</a>).
+      </p>
+    </div>
+
+    <div class="privacy-block">
+      <h3>10. Contact</h3>
       <p>
         Pour toute question relative à cette politique ou à vos données :
         <a href="mailto:manna.app@proton.me" style="color:var(--gold);">manna.app@proton.me</a>,
-        ou via notre
+        ou via le
         <a href="https://forms.gle/PLQSfC26NsA3Gn6d9" target="_blank" rel="noopener"
           style="color:var(--gold);">formulaire de contact</a>.
       </p>
@@ -849,6 +937,8 @@
     <a href="#confidentialite">Politique de confidentialité</a>
     &nbsp;·&nbsp;
     <a href="suppression-compte.html">Suppression de compte</a>
+    &nbsp;·&nbsp;
+    <a href="mentions-legales.html">Mentions légales</a>
     &nbsp;·&nbsp;
     <a href="https://bibleduo-game-production.up.railway.app" target="_blank" rel="noopener">Jouer (PWA Android et iPhone)</a>
     &nbsp;·&nbsp;
